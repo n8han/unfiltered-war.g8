@@ -12,10 +12,10 @@ class App extends unfiltered.filter.Plan {
   val logger = Logger(classOf[App])
   
   def intent = {
-    case GET(Path(p, _)) => 
+    case GET(Path(p)) => 
       logger.debug("GET %s" format p)
       Ok ~> view(Map.empty)(<p> What say you? </p>)
-    case POST(Path(p, Params(params, _))) =>
+    case POST(Path(p) & Params(params)) =>
       logger.debug("POST %s" format p)
       val vw = view(params)_
       val expected = for { 
@@ -25,7 +25,7 @@ class App extends unfiltered.filter.Plan {
         word <- lookup("palindrome") is
           trimmed is 
           nonempty("Palindrome is empty") is
-          pred(palindrome) { _ + " is not a palindrome" } is
+          pred(palindrome, { _ + " is not a palindrome" }) is
           required("missing palindrome")
       } yield vw(<p>Yup. { int.get } is an integer and { word.get } is a palindrome. </p>)
       expected(params) orFail { fails =>
