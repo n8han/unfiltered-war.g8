@@ -11,5 +11,5 @@ libraryDependencies ++= Seq(
 )
 
 resolvers ++= Seq(
-  "java m2" at "http://download.java.net/maven/2"
+  "java m2" at "http://download.java.net/maven/2
 )
