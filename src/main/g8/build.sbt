@@ -6,10 +6,9 @@ version := "$version$"
 
 libraryDependencies ++= Seq(
    "net.databinder" %% "unfiltered-filter" % "$unfiltered_version$",
-   "net.databinder" %% "unfiltered-jetty" % "$unfiltered_version$",
+   "javax.servlet" % "servlet-api" % "2.3" % "provided",
+   "org.eclipse.jetty" % "jetty-webapp" % "7.4.5.v20110725" % "jetty",
    "org.clapper" %% "avsl" % "0.3.1"
 )
 
-resolvers ++= Seq(
-  "java m2" at "http://download.java.net/maven/2"
-)
+seq(webSettings :_*)
