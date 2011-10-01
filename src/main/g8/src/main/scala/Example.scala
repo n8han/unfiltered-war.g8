@@ -12,11 +12,11 @@ class App extends unfiltered.filter.Plan {
   val logger = Logger(classOf[App])
 
   def intent = {
-    case GET(Path(p)) =>
-      logger.debug("GET %s" format p)
+    case GET(Path("/")) =>
+      logger.debug("GET /")
       Ok ~> view(Map.empty)(<p> What say you? </p>)
-    case POST(Path(p) & Params(params)) =>
-      logger.debug("POST %s" format p)
+    case POST(Path("/") & Params(params)) =>
+      logger.debug("POST /")
       val vw = view(params)_
       val expected = for {
         int <- lookup("int") is
@@ -39,7 +39,7 @@ class App extends unfiltered.filter.Plan {
      <html>
       <head>
         <title>uf example</title>
-        <link rel="stylesheet" type="text/css" href="/assets/css/app.css"/>
+        <link rel="stylesheet" type="text/css" href="/css/app.css"/>
       </head>
       <body>
        <div id="container">
